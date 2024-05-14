@@ -1,6 +1,6 @@
 # Fund Me
 
-Fund Me a decentralized crowd sourcing application. It allows the owner to recieve and withdraw funds sent from others. Built on Ethereum blockchain technology, it ensures transparency and reliability in fundraising activities.
+Fund Me is a decentralized crowd sourcing application. It allows the owner to recieve and withdraw funds sent from others. Built on Ethereum blockchain technology, it ensures transparency and reliability in fundraising activities.
 
 
 - [Fund Me](#fund-me)
