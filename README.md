@@ -8,7 +8,6 @@ Fund Me a decentralized crowd sourcing application. It allows the owner to recie
 - [Getting Started](#getting-started)
   - [Requirements](#requirements)
   - [Quickstart](#quickstart)
-    - [Optional Gitpod](#optional-gitpod)
 - [Usage](#usage)
   - [Deploy](#deploy)
   - [Testing](#testing)
@@ -19,6 +18,7 @@ Fund Me a decentralized crowd sourcing application. It allows the owner to recie
     - [Withdraw funds](#withdraw-funds)
   - [Estimate gas cost](#estimate-gas-cost)
 - [Formatting](#formatting)
+- [Disclaimer](#disclaimer)
 - [Acknowledgements](#acknowledgements)
 - [Thank you!](#thank-you)
 
@@ -44,19 +44,14 @@ Ensure you have the following prerequisites installed on your system:
 
 ## Quickstart
 
-Clone the repository and build the project locally:
+Clone this repository and build the project locally:
 
 ```
-git clone https://github.com/dmariet/foundry-fund-me-f23
+git clone https://github.com/dmariet/fund-me
 cd foundry-fund-me-f23
 forge build
 ```
 
-### Optional Gitpod
-
-If you can't or don't want to run and install locally, you can work with this repo in Gitpod. If you do this, you can skip the `clone this repo` part. Access the project in Gitpod without local installation:
-
-[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#github.com/dmariet/foundry-fund-me-f23)
 
 # Usage
 
@@ -216,6 +211,10 @@ To ensure formatting consistency:
 ```
 forge fmt
 ```
+
+# Disclaimer 
+
+None of the code has been audited or undergone a security review, use at your own risk.
 
 # Acknowledgements
 
