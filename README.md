@@ -1,66 +1,230 @@
-## Foundry
+# Fund Me
 
-**Foundry is a blazing fast, portable and modular toolkit for Ethereum application development written in Rust.**
+Fund Me a decentralized crowd sourcing application. It allows the owner to recieve and withdraw funds sent from others. Built on Ethereum blockchain technology, it ensures transparency and reliability in fundraising activities.
 
-Foundry consists of:
 
--   **Forge**: Ethereum testing framework (like Truffle, Hardhat and DappTools).
--   **Cast**: Swiss army knife for interacting with EVM smart contracts, sending transactions and getting chain data.
--   **Anvil**: Local Ethereum node, akin to Ganache, Hardhat Network.
--   **Chisel**: Fast, utilitarian, and verbose solidity REPL.
+- [Fund Me](#fund-me)
+  - [Built With](#built-with)
+- [Getting Started](#getting-started)
+  - [Requirements](#requirements)
+  - [Quickstart](#quickstart)
+    - [Optional Gitpod](#optional-gitpod)
+- [Usage](#usage)
+  - [Deploy](#deploy)
+  - [Testing](#testing)
+    - [Test Coverage](#test-coverage)
+- [Deployment to a testnet or mainnet](#deployment-to-a-testnet-or-mainnet)
+  - [Scripts](#scripts)
+    - [Fund the contract](#fund-the-contract)
+    - [Withdraw funds](#withdraw-funds)
+  - [Estimate gas cost](#estimate-gas-cost)
+- [Formatting](#formatting)
+- [Acknowledgements](#acknowledgements)
+- [Thank you!](#thank-you)
 
-## Documentation
 
-https://book.getfoundry.sh/
+## Built With
 
-## Usage
+- Foundry - The Ethereum smart contract framework used.
+- Git: Version control system.
+- Chainlink - Decentralized oracle network for secure and reliable data feeds.
+    
 
-### Build
+# Getting Started
 
-```shell
-$ forge build
+## Requirements
+
+Ensure you have the following prerequisites installed on your system:
+
+- [git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
+  - You'll know you did it right if you can run `git --version` and you see a response like `git version x.x.x`
+- [foundry](https://getfoundry.sh/)
+  - You'll know you did it right if you can run `forge --version` and you see a response like `forge 0.2.0 (2e3c197 2024-05-06T15:58:31.193893000Z)`
+
+
+## Quickstart
+
+Clone the repository and build the project locally:
+
+```
+git clone https://github.com/dmariet/foundry-fund-me-f23
+cd foundry-fund-me-f23
+forge build
 ```
 
-### Test
+### Optional Gitpod
 
-```shell
-$ forge test
+If you can't or don't want to run and install locally, you can work with this repo in Gitpod. If you do this, you can skip the `clone this repo` part. Access the project in Gitpod without local installation:
+
+[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#github.com/dmariet/foundry-fund-me-f23)
+
+# Usage
+
+## Deploy
+
+Deploy the Fund Me contract to your desired network:
+
+```
+forge script script/DeployFundMe.s.sol
 ```
 
-### Format
+## Testing
 
-```shell
-$ forge fmt
+Ensure proper functioning by testing the project functions:
+
+
+```
+forge test
 ```
 
-### Gas Snapshots
+or 
 
-```shell
-$ forge snapshot
+For more advanced testing or to test a single function, use the following commands:
+
+```
+// Only run test functions matching the specified regex pattern.
+
+forge test --match-test testFunctionName
 ```
 
-### Anvil
+or
 
-```shell
-$ anvil
+```
+forge test --fork-url $SEPOLIA_RPC_URL
 ```
 
-### Deploy
+### Test Coverage
 
-```shell
-$ forge script script/Counter.s.sol:CounterScript --rpc-url <your_rpc_url> --private-key <your_private_key>
+Generate test coverage reports:
+```
+forge coverage
 ```
 
-### Cast
 
-```shell
-$ cast <subcommand>
+# Deployment to a testnet or mainnet
+
+1. Setup environment variables in a `.env` file:
+
+You'll want to set your `SEPOLIA_RPC_URL` and `PRIVATE_KEY` as environment variables. You can add them to a `.env` file, similar to what you see in `.env.example`.
+
+- `PRIVATE_KEY`: The private key of your account (like from [metamask](https://metamask.io/)). **NOTE:** FOR DEVELOPMENT, PLEASE USE A KEY THAT DOESN'T HAVE ANY REAL FUNDS ASSOCIATED WITH IT. IT IS BEST TO ENCRYPT IT INSTEAD OF STORING IN `.env` (keep reading).
+  - You can [learn how to export it here](https://metamask.zendesk.com/hc/en-us/articles/360015289632-How-to-Export-an-Account-Private-Key).
+- `SEPOLIA_RPC_URL`: This is url of the sepolia testnet node you're working with. You can get setup with one for free from [Alchemy](https://alchemy.com/?r=890d65401067a3ce)
+
+Optionally, add your `ETHERSCAN_API_KEY` if you want to verify your contract on [Etherscan](https://etherscan.io/).
+
+```
+PRIVATE_KEY=your_private_key
+SEPOLIA_RPC_URL=your_sepolia_rpc_url
+ETHERSCAN_API_KEY=your_etherscan_api_key (optional)
 ```
 
-### Help
 
-```shell
-$ forge --help
-$ anvil --help
-$ cast --help
+FOR DEVELOPMENT, you'll want to encrypt your `PRIVATE_KEY` instead of storing it in plain text in the `.env` file -> a keystore in Foundry.
+
+- You will create an `ACCOUNT_NAME` and a password for your encrypted `PRIVATE_KEY`.
+
 ```
+cast wallet import your-account-name --interactive
+Enter private key:
+Enter password:
+`your-account-name` keystore was saved successfully. Address: address-corresponding-to-private-key
+```
+
+```
+forge script <script> --rpc-url <rpc_url> --account <account_name> --sender <address> --broadcast
+```
+
+- Add your `ACCOUNT_NAME` and `ADDRESS` to your `.env` file.
+```
+ACCOUNT_NAME=xxxxyour-account-name
+ADDRESS=0x000your-address
+SEPOLIA_RPC_URL=http://0.0.5555
+ETHERSCAN_API_KEY=your_etherscan_api_key (optional)
+```
+
+1. Get testnet ETH from Chainlink Faucet:
+
+Head over to [faucets.chain.link](https://faucets.chain.link/) and get some testnet ETH. You should see the testnet ETH show up in your metamask. If not, make sure you have the testnet ETH added
+
+3. Deploy the contract:
+
+```
+forge script script/DeployFundMe.s.sol --rpc-url $SEPOLIA_RPC_URL --private-key $PRIVATE_KEY --broadcast --verify --etherscan-api-key $ETHERSCAN_API_KEY
+```
+
+or if the `PRIVATE_KEY` is encrypted
+
+```
+forge script script/DeployFundMe.s.sol --rpc-url $SEPOLIA_RPC_URL --account $ACCOUNT_NAME --sender $ADDRESS --broadcast --verify --etherscan-api-key $ETHERSCAN_API_KEY -vvvv
+```
+
+## Scripts
+
+After deploying to a testnet or local net, you can execute the various contract scripts: 
+
+### Fund the contract
+
+Using cast deployed locally example: 
+
+```
+cast send <FUNDME_CONTRACT_ADDRESS> "fund()" --value 0.1ether --private-key <PRIVATE_KEY>
+```
+
+or
+```
+forge script script/Interactions.s.sol --rpc-url sepolia  --private-key $PRIVATE_KEY  --broadcast
+```
+
+or if the `PRIVATE_KEY` is encrypted
+
+```
+cast send <FUNDME_CONTRACT_ADDRESS> "fund()" --value 0.1ether --account ACCOUNT_NAME --sender ADDRESS
+```
+
+or
+```
+forge script script/Interactions.s.sol --rpc-url sepolia --account $ACCOUNT_NAME --sender $ADDRESS --broadcast
+```
+
+### Withdraw funds
+
+```
+cast send <FUNDME_CONTRACT_ADDRESS> "withdraw()"  --private-key <PRIVATE_KEY>
+```
+
+or if the `PRIVATE_KEY` is encrypted
+```
+cast send <FUNDME_CONTRACT_ADDRESS> "withdraw()"  --account ACCOUNT_NAME --sender ADDRESS
+```
+
+## Estimate gas cost
+
+You can estimate how much gas things cost by running:
+
+```
+forge snapshot
+```
+
+And you'll see an output file called `.gas-snapshot`
+
+
+# Formatting
+
+
+To ensure formatting consistency:
+```
+forge fmt
+```
+
+# Acknowledgements
+
+Special thanks to Patrick Collins for his invaluable teaching and guidance!
+
+
+# Thank you!
+
+If you find this helpful, consider following or supporting me!
+
+[![Crypto Auntie Twitter](https://img.shields.io/badge/Twitter-1DA1F2?style=for-the-badge&logo=twitter&logoColor=white)](https://twitter.com/CryptoAuntieD)
+[![Crypto Auntie YouTube](https://img.shields.io/badge/YouTube-FF0000?style=for-the-badge&logo=youtube&logoColor=white)](https://www.youtube.com/channel/UCDVVmzwg-0g5XluEzqrtHnA)

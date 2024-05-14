@@ -1,0 +1,5 @@
+PRIVATE_KEY=XXXXyour_private_key
+ACCOUNT_NAME=xxxxyour-account-name
+ADDRESS=0x000your-address
+SEPOLIA_RPC_URL=http://0.0.5555
+ETHERSCAN_API_KEY=XXXXX
