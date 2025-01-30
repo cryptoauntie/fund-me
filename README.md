@@ -47,7 +47,7 @@ Ensure you have the following prerequisites installed on your system:
 Clone this repository and build the project locally:
 
 ```
-git clone https://github.com/dmariet/fund-me
+git clone https://github.com/cryptoauntie/fund-me
 cd foundry-fund-me-f23
 forge build
 ```
@@ -223,7 +223,3 @@ Special thanks to Patrick Collins for his invaluable teaching and guidance!
 
 # Thank you!
 
-If you find this helpful, consider following or supporting me!
-
-[![Crypto Auntie Twitter](https://img.shields.io/badge/Twitter-1DA1F2?style=for-the-badge&logo=twitter&logoColor=white)](https://twitter.com/CryptoAuntieD)
-[![Crypto Auntie YouTube](https://img.shields.io/badge/YouTube-FF0000?style=for-the-badge&logo=youtube&logoColor=white)](https://www.youtube.com/channel/UCDVVmzwg-0g5XluEzqrtHnA)
